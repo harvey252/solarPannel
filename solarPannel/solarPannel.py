@@ -1,6 +1,26 @@
 # Example file showing a circle moving on screen
 import pygame
 
+
+def main():
+    # pygame setup
+    pygame.init()
+    screen = pygame.display.set_mode((1280, 720))
+    clock = pygame.time.Clock()
+    running = True
+    dt = 0
+    
+
+    import cleaningMinigame
+    cleaningMinigame.init()
+    while cleaningMinigame.run(clock):
+        cleaningMinigame.draw(screen)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+
+
 def draw():
     # fill the screen with a color to wipe away anything from last frame
     screen.fill("purple")
@@ -8,21 +28,13 @@ def draw():
     pygame.draw.circle(screen, "red", player_pos, 40)
     
 
-# pygame setup
-pygame.init()
-screen = pygame.display.set_mode((1280, 720))
-clock = pygame.time.Clock()
-running = True
-dt = 0
+main()
 
-player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
 
 while running:
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+    
 
     draw()
 
