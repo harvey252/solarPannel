@@ -1,53 +1,85 @@
 
 #window cleaning example
 
+#https://www.shutterstock.com/image-photo/front-view-solar-panel-isolated-on-1960798867 
 
 
 import pygame
-
-spongPos = pygame.Vector2(0,0)
-imp=pygame.image
-
-def init():
-    print("init")
-    spongPos = pygame.Vector2(0,0)
-    
-    #print(imp.get_width())
-    
+import random
 
 
 
-#draw funciton draws what ever is happening to the screen
-def draw(screen):
-    # fill the screen with a color to wipe away anything from last frame
-    screen.fill("purple")
-    imp = pygame.image.load("sponge.png").convert()
-    imp = pygame.transform.scale(imp, (100, 100))
-    
-    screen.blit(imp, spongPos)
-    
-    #used to display to screen
-    pygame.display.flip()
+class cleaningGame:
 
+    def __init__(self):
+        print("init")
+        self.spongPos = pygame.Vector2(0,0)
+        self.spongeImage = pygame.image.load("sponge.png").convert()
+        self.spongeImage = pygame.transform.scale(self.spongeImage, (100, 100))
+        
+        self.plannelImage = pygame.image.load("solarPannelImage.png").convert()
+        
+        self.plannelImage=pygame.transform.scale(self.plannelImage,(500,720))
 
-#run function contains the game loop returns true on mini game being over 0 if it is ongoing
-def run(clock):
+        self.dirtImage = pygame.image.load("dirt.png").convert()
+        self.dirtImage=pygame.transform.scale(self.dirtImage,(5,5))
 
-
-    #geting keys pressed
+        self.dirt=[]
+        for i in range(5000):
+            self.dirt.append(pygame.Vector2(random.randint(0,495),random.randint(0,715)))
     
     
-    spongPos.x = pygame.mouse.get_pos()[0]-50;
-    spongPos.y = pygame.mouse.get_pos()[1]-50;
-  
-    
+        self.spongeSize=40
 
-    # limits FPS to 60
-    # dt is delta time in seconds since last frame, used for framerate-
-    # independent physics.
-    dt = clock.tick(60) / 1000
+
+
+    #draw funciton draws what ever is happening to the screen
+    def draw(self,screen):
+        # fill the screen with a color to wipe away anything from last frame
+        screen.fill("black")
+
+        screen.blit(self.plannelImage, (0,0))
+    
+        for i in range(len(self.dirt)):
+            screen.blit(self.dirtImage, self.dirt[i])
+
+        screen.blit(self.spongeImage, self.spongPos)
+    
+        #used to display to screen
+        pygame.display.flip()
+        
         
 
 
-    return True;
+    #run function contains the game loop returns true on mini game being over 0 if it is ongoing
+    def run(self,clock):
+
+
+        #geting keys pressed
+    
+        mousePos=pygame.mouse.get_pos();
+        self.spongPos.x = mousePos[0]-50;
+        self.spongPos.y = mousePos[1]-50;
+        
+        tempDirt=[]
+        
+        for i in range(len(self.dirt)):
+           if(not ((mousePos[0]-self.spongeSize<self.dirt[i].x) & (mousePos[0]+self.spongeSize>self.dirt[i].x) & 
+              (mousePos[1]-self.spongeSize<self.dirt[i].y) & (mousePos[1]+self.spongeSize>self.dirt[i].y))):
+                tempDirt.append(self.dirt[i])
+        
+        self.dirt = tempDirt
+        
+
+    
+
+        # limits FPS to 60
+        # dt is delta time in seconds since last frame, used for framerate-
+        # independent physics.
+        dt = clock.tick(60) / 1000
+        
+        if(len(self.dirt)<5):
+            return False
+        else:
+            return True
 

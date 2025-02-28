@@ -25,6 +25,8 @@
     <Compile Include="solarPannel.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="dirt.png" />
+    <Content Include="solarPannelImage.png" />
     <Content Include="sponge.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
