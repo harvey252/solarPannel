@@ -23,6 +23,7 @@
   <ItemGroup>
     <Compile Include="cleaningMinigame.py" />
     <Compile Include="solarPannel.py" />
+    <Compile Include="tempControlMinigame.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="dirt.png" />

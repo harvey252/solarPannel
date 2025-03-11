@@ -1,6 +1,7 @@
 # Example file showing a circle moving on screen
 import pygame
 import cleaningMinigame
+import tempControlMinigame
 
 def main():
     # pygame setup
@@ -10,6 +11,15 @@ def main():
     running = True
     dt = 0
     
+
+    game = tempControlMinigame.tempControl()
+    
+    while game.run(clock):
+        game.draw(screen)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
 
     
     game = cleaningMinigame.cleaningGame()
