@@ -23,7 +23,7 @@ def main():
 
     
     game = cleaningMinigame.cleaningGame()
-    
+    print('test')
     while game.run(clock):
         game.draw(screen)
         for event in pygame.event.get():
