@@ -1,8 +1,6 @@
 
 #window cleaning example
 
-#https://www.shutterstock.com/image-photo/front-view-solar-panel-isolated-on-1960798867 
-
 
 import pygame
 import random
@@ -21,9 +19,9 @@ class cleaningGame:
        
 
 
-        self.plannelImage = pygame.image.load("solarPannelImage.png").convert()
+        self.background = pygame.image.load("solarPannelCleaningBackground.jpg").convert()
         
-        self.plannelImage=pygame.transform.scale(self.plannelImage,(500,720))
+        self.background=pygame.transform.scale(self.background,(1280,720))
 
         self.dirtImage = pygame.image.load("dirt.png").convert_alpha()
         self.dirtImage=pygame.transform.scale(self.dirtImage,(5,5))
@@ -32,7 +30,7 @@ class cleaningGame:
         #generating dirt
         self.dirt=[]
         for i in range(5000):
-            self.dirt.append(pygame.Vector2(random.randint(0,495),random.randint(0,715)))
+            self.dirt.append(pygame.Vector2(random.randint(340,935),random.randint(0,715)))
     
     
         self.spongeSize=40
@@ -45,7 +43,7 @@ class cleaningGame:
         screen.fill("black")
 
         #drawing in the solar pannel
-        screen.blit(self.plannelImage, (0,0))
+        screen.blit(self.background, (0,0))
     
         #drawing in each dirt
         for i in range(len(self.dirt)):

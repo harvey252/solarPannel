@@ -13,6 +13,9 @@ import random
 class tempControl:
 
     def __init__(self):
+        self.background = pygame.image.load("heatingBackground.jpg").convert()
+        
+        self.background=pygame.transform.scale(self.background,(1280,720))
         #setting inital values
         self.temp=0
         self.upperTemp=4
@@ -20,12 +23,12 @@ class tempControl:
         self.setTime=0;
 
         #creating rectangles for meter
-        self.needle=pygame.Rect((0,0),(20,2))
-        self.bar=pygame.Rect((0,0),(20,720))
-        self.indicator= pygame.Rect((0,144),(20,144))
+        self.needle=pygame.Rect((605,0),(75,2))
+        self.bar=pygame.Rect((605,0),(75,720))
+        self.indicator= pygame.Rect((605,144),(75,144))
 
         #generating font
-        self.titlefont=pygame.font.SysFont('timesnewroman',  30)
+        self.titlefont=pygame.font.SysFont('comicsans',  50)
 
 
 
@@ -33,12 +36,12 @@ class tempControl:
     def draw(self,screen):
         # fill the screen with a color to wipe away anything from last frame
         screen.fill("black")
-        
+        screen.blit(self.background, (0,0))
 
-        renderTemp=round(3-self.setTime,2)
+        renderTemp=round(3-self.setTime,1)
         #rending font
         letter2=self.titlefont.render(str(renderTemp), False, (0,0,0), (255,255,255))
-        screen.blit(letter2, (50,50))
+        screen.blit(letter2, (827,230))
         
         #drawing meter
         pygame.draw.rect(screen,(255,0,0),self.bar)
