@@ -83,3 +83,21 @@ class cleaningGame:
         else:
             return True
 
+if __name__ == "__main__":
+    pygame.init()
+    screen = pygame.display.set_mode((500, 720))
+    clock = pygame.time.Clock()
+
+    game = cleaningGame()
+    running = True
+
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+        running = game.run(clock)
+        game.draw(screen)
+
+    pygame.quit()
+
