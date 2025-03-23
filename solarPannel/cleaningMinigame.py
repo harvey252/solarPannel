@@ -19,7 +19,7 @@ class cleaningGame:
        
 
 
-        self.background = pygame.image.load("solarPannelCleaningBackground.jpg").convert()
+        self.background = pygame.image.load("solarPannelCleaningBackground.png").convert()
         
         self.background=pygame.transform.scale(self.background,(1280,720))
 

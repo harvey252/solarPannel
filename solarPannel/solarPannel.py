@@ -55,9 +55,9 @@ def main():
     
     #first two slides
     if(running):
-        running = slide("startSlide.jpg",screen)
+        running = slide("startSlide.png",screen)
     if(running):
-        running = slide("processingSilconeSlide.jpg",screen)
+        running = slide("processingSilconeSlide.png",screen)
     
     #temp control minigame
     if(running):
@@ -71,7 +71,7 @@ def main():
                     
     #solar panel cleaning slide
     if(running):
-        running = slide("cleaningSolarpannels.jpg",screen)
+        running = slide("cleaningSolarpannels.png",screen)
     
     #solar panel cleaning minigame
     if(running):
