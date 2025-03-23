@@ -12,10 +12,7 @@ class cleaningGame:
     def __init__(self):
      
 
-        #this reciton loads in images
-        self.spongPos = pygame.Vector2(0,0)
-        self.spongeImage = pygame.image.load("sponge.png").convert_alpha()#convert_alpha required for transparrent images
-        self.spongeImage = pygame.transform.scale(self.spongeImage, (100, 100))
+    
        
 
 
@@ -49,8 +46,7 @@ class cleaningGame:
         for i in range(len(self.dirt)):
             screen.blit(self.dirtImage, self.dirt[i])
 
-        #drawing in the sponge
-        screen.blit(self.spongeImage, self.spongPos)
+ 
     
         #used to display to screen
         pygame.display.flip()
@@ -64,10 +60,7 @@ class cleaningGame:
 
         #geting mouse pos
         mousePos=pygame.mouse.get_pos();
-        
-        #setting spong pos
-        self.spongPos.x = mousePos[0]-50;
-        self.spongPos.y = mousePos[1]-50;
+
         
         #finding dirt near enough to the spong to be removed
         tempDirt=[]
