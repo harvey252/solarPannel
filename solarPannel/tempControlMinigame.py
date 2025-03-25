@@ -13,7 +13,7 @@ import random
 class tempControl:
 
     def __init__(self):
-        self.background = pygame.image.load("heatingBackground.png").convert()
+        self.background = pygame.image.load("images/heatingBackground.png").convert()
         
         self.background=pygame.transform.scale(self.background,(1280,720))
         #setting inital values

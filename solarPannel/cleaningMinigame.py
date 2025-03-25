@@ -16,11 +16,11 @@ class cleaningGame:
        
 
 
-        self.background = pygame.image.load("solarPannelCleaningBackground.png").convert()
+        self.background = pygame.image.load("images/solarPannelCleaningBackground.png").convert()
         
         self.background=pygame.transform.scale(self.background,(1280,720))
 
-        self.dirtImage = pygame.image.load("dirt.png").convert_alpha()
+        self.dirtImage = pygame.image.load("images/dirt.png").convert_alpha()
         self.dirtImage=pygame.transform.scale(self.dirtImage,(5,5))
 
 

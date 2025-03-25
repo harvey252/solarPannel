@@ -6,7 +6,7 @@ def run(screen):
     pygame.init()
     WIDTH, HEIGHT = 1280,720
 
-    background_image = pygame.image.load('gameBackground.png')  
+    background_image = pygame.image.load('images/gameBackground.png')  
     background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
 
     # Screen dimensions
@@ -120,5 +120,3 @@ def run(screen):
         # Update the screen
         pygame.display.flip()
 
-    pygame.quit()
-    sys.exit()

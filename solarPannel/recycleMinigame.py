@@ -87,7 +87,7 @@ def run(screen):
    clock = pygame.time.Clock()
    
    #load background
-   background = pygame.transform.scale(pygame.image.load("gameBackground.png"), (1280, 720))
+   background = pygame.transform.scale(pygame.image.load("images/gameBackground.png"), (1280, 720))
 
    # Initialize sprites
    all_sprites = pygame.sprite.Group()

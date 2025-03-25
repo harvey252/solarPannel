@@ -17,7 +17,7 @@ def run(screen):
     font = pygame.font.SysFont('Arial', 24)
 
     # Load images
-    background = pygame.transform.scale(pygame.image.load("gameBackground.png"), (1280, 720))
+    background = pygame.transform.scale(pygame.image.load("images/gameBackground.png"), (1280, 720))
 
     # Function to add border to an image
     def add_border(image, border_size=5):
