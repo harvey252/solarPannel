@@ -11,7 +11,7 @@ def run(screen):
 
     # Screen dimensions
     screen 
-    pygame.display.set_caption("Solar Panel Assembly")
+   
 
     # Colors
     WHITE = (255, 255, 255)

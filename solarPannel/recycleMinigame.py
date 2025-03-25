@@ -83,7 +83,7 @@ def game_over_screen(screen, score):
 
 def run(screen):
    #screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-   pygame.display.set_caption("Solar Panel Recycling")
+
    clock = pygame.time.Clock()
    
    #load background

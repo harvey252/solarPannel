@@ -11,6 +11,8 @@ import disassemably
 
 import building
 
+import catchingGame
+
 #funciton to render a slide and then move on when space is pressed
 def slide(slideName,screen):
     #loading in image for slide
@@ -51,12 +53,13 @@ def slide(slideName,screen):
 def main():
     # pygame setup
     pygame.init()
+    pygame.display.set_caption("Life cycle of a solar panel")
     screen = pygame.display.set_mode((1280, 720))
     clock = pygame.time.Clock()
     running = True
     dt = 0
     
-
+    
     #all slides and mini games must check for running before they start
     
     
@@ -64,6 +67,9 @@ def main():
     #first two slides
     if(running):
         running = slide("images/startSlide.png",screen)
+    
+    
+
     if(running):
         running = slide("images/processingSilconeSlide.png",screen)
     
@@ -98,6 +104,14 @@ def main():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running=False
+
+    
+    #catching energy slide
+    if(running):
+        running = slide("images/howDoTheyWorkSlide.png",screen)
+    
+    #catching energy game
+    catchingGame.run(screen)                
 
     #solar panel cleaning slide
     if(running):

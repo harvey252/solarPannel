@@ -22,6 +22,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="building.py" />
+    <Compile Include="catchingGame.py" />
     <Compile Include="cleaningMinigame.py" />
     <Compile Include="disassemably.py" />
     <Compile Include="powerTheCityGame.py" />

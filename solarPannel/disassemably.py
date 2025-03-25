@@ -8,7 +8,7 @@ def run(screen):
     # Screen dimensions
     WIDTH, HEIGHT = 1200, 900
 
-    pygame.display.set_caption("Solar Panel Disassembly")
+  
 
     # Colors
     WHITE, GREEN, RED, GRAY, BLACK = (255, 255, 255), (0, 255, 0), (255, 0, 0), (200, 200, 200), (0, 0, 0)
