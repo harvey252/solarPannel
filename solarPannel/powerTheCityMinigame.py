@@ -16,6 +16,8 @@ class powerTheCityGame:
 
         # Load and scale background
         try:
+            
+
             raw_bg = pygame.image.load("prettyCountryside.png").convert()
             bg_w, bg_h = raw_bg.get_size()
             scale = min(max_width / bg_w, max_height / bg_h)
@@ -29,6 +31,8 @@ class powerTheCityGame:
             self.background = pygame.Surface((self.window_width, self.window_height))
             self.background.fill((0, 100, 0))
             scale = 1.0
+
+         
 
         # Tile and layout setup
         self.tile_size = min(self.window_width // (self.grid_size + 2), self.window_height // (self.grid_size + 2))

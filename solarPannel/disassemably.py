@@ -2,12 +2,12 @@
 import pygame
 import sys
 import random
-def run():
+def run(screen):
     # Initialize Pygame
 
     # Screen dimensions
     WIDTH, HEIGHT = 1200, 900
-    screen = pygame.display.set_mode((WIDTH, HEIGHT))
+
     pygame.display.set_caption("Solar Panel Disassembly")
 
     # Colors
@@ -17,7 +17,7 @@ def run():
     font = pygame.font.SysFont('Arial', 24)
 
     # Load images
-    background = pygame.transform.scale(pygame.image.load("images/background.png"), (WIDTH, HEIGHT))
+    background = pygame.transform.scale(pygame.image.load("gameBackground.png"), (1280, 720))
 
     # Function to add border to an image
     def add_border(image, border_size=5):
@@ -46,7 +46,7 @@ def run():
     # Set vertical gap and starting positions
     max_height = HEIGHT - 200
     total_height = sum(comp["surface"].get_height() for comp in components)
-    vertical_gap = max(20, (max_height - total_height) // (len(components) - 1))
+    vertical_gap = max(20, (max_height - total_height) // (len(components) - 1)-100)
     start_y = 100
 
     # Assign positions

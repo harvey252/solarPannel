@@ -9,12 +9,16 @@ from powerTheCityMinigame import powerTheCityGame
 
 import disassemably
 
+import building
+
 #funciton to render a slide and then move on when space is pressed
 def slide(slideName,screen):
     #loading in image for slide
     slideImage = spongeImage = pygame.image.load(slideName).convert()
-    slideImage=pygame.transform.scale(slideImage,(1280,1000))
+    slideImage=pygame.transform.scale(slideImage,(1280,720))
     
+    
+
     #drawing image
     
     screen.blit(slideImage,(0,0))
@@ -59,12 +63,11 @@ def main():
     
     #first two slides
     if(running):
-        running = slide("startSlide.png",screen)
+        running = slide("images/startSlide.png",screen)
     if(running):
-        running = slide("processingSilconeSlide.png",screen)
+        running = slide("images/processingSilconeSlide.png",screen)
     
-    disassemably.run()
-    screen = pygame.display.set_mode((1280, 720))
+    
 
     #temp control minigame
     if(running):
@@ -77,12 +80,16 @@ def main():
                     running = False
     
 
-
-    
+    #assembey slide
+    if(running):
+        running = slide("images/componentsSlides.png",screen)
+    #assembly game
+    if(running):
+        building.run(screen)
                     
     #power the city slide
     if(running):
-        running = slide("powerTheCitySlide.png",screen)
+        running = slide("images/powerTheCitySlide.png",screen)
     #power the city game
     if(running):
         game = powerTheCityGame()
@@ -94,7 +101,7 @@ def main():
 
     #solar panel cleaning slide
     if(running):
-        running = slide("cleaningSolarpannels.png",screen)
+        running = slide("images/cleaningSolarpannels.png",screen)
     
     #solar panel cleaning minigame
     if(running):
@@ -106,10 +113,25 @@ def main():
                 if event.type == pygame.QUIT:
                     running = False
 
+
+    #dissassembly slide
+    if(running):
+        running = slide("images/dissasemblySlide.png",screen)
+    #disassembly game
+    if(running):                
+        disassemably.run(screen)
+
+    #recycling slide
+    if(running):
+        running = slide("images/recyclingSlide.png",screen)
     #recycling game
     if(running):                
         recycleMinigame.run(screen)
-                
+    
+
+    #prueifying siclone slide
+    
+    #final slide 
     pygame.quit()
 
     

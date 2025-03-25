@@ -86,6 +86,8 @@ def run(screen):
    pygame.display.set_caption("Solar Panel Recycling")
    clock = pygame.time.Clock()
    
+   #load background
+   background = pygame.transform.scale(pygame.image.load("gameBackground.png"), (1280, 720))
 
    # Initialize sprites
    all_sprites = pygame.sprite.Group()
@@ -155,6 +157,7 @@ def run(screen):
 
        # Draw everything
        screen.fill((255, 255, 255))
+       screen.blit(background, (0, 0))
        all_sprites.draw(screen)
 
        # Display UI
