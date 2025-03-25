@@ -5,7 +5,7 @@ import random
 pygame.init()
 
 # Game constants
-SCREEN_WIDTH, SCREEN_HEIGHT = 800, 600
+SCREEN_WIDTH, SCREEN_HEIGHT = 1280, 720
 PANEL_TYPES = ['silicon', 'thin-film', 'organic']
 COLORS = {
    'silicon': (0, 0, 255),
@@ -51,13 +51,14 @@ class RecyclingBin(pygame.sprite.Sprite):
 class Recycler(pygame.sprite.Sprite):
    def __init__(self):
        super().__init__()
+       
        self.image = pygame.Surface((60, 60))
        self.current_color = (128, 128, 128)  # Initial gray color
        self.image.fill(self.current_color)
        self.rect = self.image.get_rect()
        self.rect.centerx = SCREEN_WIDTH // 2
        self.rect.bottom = SCREEN_HEIGHT - 20
-       self.speed = 8
+       self.speed = 16
        self.held_panel = None
 
    def update(self, keys):
@@ -80,11 +81,12 @@ def game_over_screen(screen, score):
    pygame.display.flip()
    pygame.time.wait(3000)
 
-def main():
-   screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+def run(screen):
+   #screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
    pygame.display.set_caption("Solar Panel Recycling")
    clock = pygame.time.Clock()
    
+
    # Initialize sprites
    all_sprites = pygame.sprite.Group()
    panels = pygame.sprite.Group()
@@ -105,7 +107,7 @@ def main():
    lives = 3
    running = True
 
-   pygame.time.set_timer(SPAWN_PANEL_EVENT, 1500)
+   pygame.time.set_timer(SPAWN_PANEL_EVENT, 2000)
 
    while running:
        for event in pygame.event.get():
@@ -126,10 +128,9 @@ def main():
                    target_bin = list(bins)[bin_index]
                    if recycler.held_panel.type == target_bin.type:
                        score += 10
-                   else:
-                       lives -= 1
-                       if lives <= 0:
-                           running = False
+                   
+                   if score >= 100:
+                       running = False
                    recycler.held_panel.kill()
                    recycler.held_panel = None
                    recycler.current_color = (128, 128, 128)  # Reset to gray
@@ -160,14 +161,14 @@ def main():
        font = pygame.font.Font(None, 36)
        score_text = font.render(f"Score: {score}", True, (0, 0, 0))
        screen.blit(score_text, (10, 10))
-       lives_text = font.render(f"Lives: {lives}", True, (0, 0, 0))
-       screen.blit(lives_text, (10, 50))
+       
+       #lives_text = font.render(f"Lives: {lives}", True, (0, 0, 0))
+       #screen.blit(lives_text, (10, 50))
 
        pygame.display.flip()
        clock.tick(30)
 
-   game_over_screen(screen, score)
-   pygame.quit()
+   #game_over_screen(screen, score)
 
 if __name__ == "__main__":
    main()

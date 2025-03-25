@@ -3,6 +3,8 @@ import pygame
 import cleaningMinigame
 import tempControlMinigame
 
+import recycleMinigame
+
 from powerTheCityMinigame import powerTheCityGame
 
 #funciton to render a slide and then move on when space is pressed
@@ -51,6 +53,9 @@ def main():
 
     #all slides and mini games must check for running before they start
     
+    
+    screen = pygame.display.set_mode((1280, 720))
+    
     #first two slides
     if(running):
         running = slide("startSlide.png",screen)
@@ -96,6 +101,9 @@ def main():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
+
+    #recycling game
+    recycleMinigame.run(screen)
                 
     pygame.quit()
 
