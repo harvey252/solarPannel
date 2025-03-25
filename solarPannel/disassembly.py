@@ -18,8 +18,6 @@ font = pygame.font.SysFont('Arial', 24)
 
 # Load images
 background = pygame.transform.scale(pygame.image.load("images/background.png"), (WIDTH, HEIGHT))
-info_slide_image = pygame.transform.scale(pygame.image.load("images/infopage.png"), (WIDTH, HEIGHT))
-panel_image = pygame.transform.scale(pygame.image.load("images/panel.png"), (WIDTH, HEIGHT))  # Solar panel image
 
 # Function to add border to an image
 def add_border(image, border_size=5):
@@ -59,25 +57,7 @@ for i, comp in enumerate(components):
     start_y += comp["surface"].get_height() + vertical_gap
 
 # Game state
-dragging, current_order, game_started, info_slide_shown, panel_shown, start_page_shown = None, len(components), False, False, False, False
-
-def draw_start_screen():
-    screen.blit(background, (0, 0))
-    title = font.render("Solar Panel Disassembly", True, WHITE)
-    screen.blit(title, (WIDTH // 2 - title.get_width() // 2, HEIGHT // 4))
-    start_button = pygame.draw.rect(screen, GREEN, (WIDTH // 2 - 100, HEIGHT // 2 - 50, 200, 100))
-    screen.blit(font.render("Press SPACE to Start", True, WHITE), (WIDTH // 2 - 100, HEIGHT // 2 - 20))
-    return start_button
-
-def draw_information_slide():
-    screen.blit(info_slide_image, (0, 0))
-    note_text = font.render("Press the space bar to continue to the game.", True, WHITE)
-    screen.blit(note_text, (WIDTH // 2 - note_text.get_width() // 2, HEIGHT - 50))
-
-def draw_panel_image():
-    screen.blit(panel_image, (0, 0))
-    instruction_text = font.render("Press SPACE to start the game.", True, WHITE)
-    screen.blit(instruction_text, (WIDTH // 2 - instruction_text.get_width() // 2, HEIGHT - 50))
+dragging, current_order = None, len(components)
 
 def draw_scene():
     screen.blit(background, (0, 0))
@@ -97,60 +77,29 @@ running = True
 while running:
     screen.fill(BLACK)
     
-    if not game_started:
-        if not start_page_shown:
-            # Show the start page first
-            start_button = draw_start_screen()
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    running = False
-                elif event.type == pygame.MOUSEBUTTONDOWN and start_button.collidepoint(event.pos):
-                    start_page_shown = True
-                elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                    start_page_shown = True
-        elif not info_slide_shown:
-            # Show the info page after the start page
-            draw_information_slide()
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    running = False
-                elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                    info_slide_shown = True
-        elif not panel_shown:
-            # Show the solar panel image after the info slide
-            draw_panel_image()
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    running = False
-                elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                    panel_shown = True
-        else:
-            # Once everything is shown, start the game
-            game_started = True
-    else:
-        draw_scene()
-        if all(not c["assembled"] for c in components) and not well_done_message_shown:
-            well_done_message_shown = True
-            screen.blit(font.render("Well Done!", True, GREEN), (WIDTH // 2 - 80, 150))
-        
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                for comp in components:
-                    if pygame.Rect(comp["pos"], comp["surface"].get_size()).collidepoint(event.pos) and comp["assembled"]:
-                        dragging = comp
-            elif event.type == pygame.MOUSEBUTTONUP and dragging:
-                if dragging["target"].collidepoint(event.pos) and dragging["order"] == current_order:
-                    dragging["pos"] = dragging["target"].topleft
-                    dragging["assembled"] = False
-                    current_order -= 1
-                else:
-                    reset_component_position(dragging)
-                dragging = None
-            elif event.type == pygame.MOUSEMOTION and dragging:
-                dragging["pos"][0] += event.rel[0]
-                dragging["pos"][1] += event.rel[1]
+    draw_scene()
+
+    if all(not c["assembled"] for c in components):
+        screen.blit(font.render("Well Done!", True, GREEN), (WIDTH // 2 - 80, 150))
+    
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            for comp in components:
+                if pygame.Rect(comp["pos"], comp["surface"].get_size()).collidepoint(event.pos) and comp["assembled"]:
+                    dragging = comp
+        elif event.type == pygame.MOUSEBUTTONUP and dragging:
+            if dragging["target"].collidepoint(event.pos) and dragging["order"] == current_order:
+                dragging["pos"] = dragging["target"].topleft
+                dragging["assembled"] = False
+                current_order -= 1
+            else:
+                reset_component_position(dragging)
+            dragging = None
+        elif event.type == pygame.MOUSEMOTION and dragging:
+            dragging["pos"][0] += event.rel[0]
+            dragging["pos"][1] += event.rel[1]
 
     pygame.display.flip()
 
