@@ -21,7 +21,7 @@ def slide(slideName,screen):
     
     pygame.display.flip()
     
-    disassemably.run(screen)
+   
         
     #ending slide when space is pressed
     running = True
@@ -56,7 +56,6 @@ def main():
     #all slides and mini games must check for running before they start
     
     
-    screen = pygame.display.set_mode((1280, 720))
     
     #first two slides
     if(running):
@@ -64,6 +63,9 @@ def main():
     if(running):
         running = slide("processingSilconeSlide.png",screen)
     
+    disassemably.run()
+    screen = pygame.display.set_mode((1280, 720))
+
     #temp control minigame
     if(running):
         game = tempControlMinigame.tempControl()
@@ -105,7 +107,8 @@ def main():
                     running = False
 
     #recycling game
-    recycleMinigame.run(screen)
+    if(running):                
+        recycleMinigame.run(screen)
                 
     pygame.quit()
 

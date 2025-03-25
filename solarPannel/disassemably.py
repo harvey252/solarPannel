@@ -1,12 +1,13 @@
+
 import pygame
 import sys
 import random
+def run():
+    # Initialize Pygame
 
-WIDTH, HEIGHT = 1280,720
-WIDTH, HEIGHT = 1200, 900
-
-def run(screen):
-
+    # Screen dimensions
+    WIDTH, HEIGHT = 1200, 900
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("Solar Panel Disassembly")
 
     # Colors
@@ -17,8 +18,6 @@ def run(screen):
 
     # Load images
     background = pygame.transform.scale(pygame.image.load("images/background.png"), (WIDTH, HEIGHT))
-    info_slide_image = pygame.transform.scale(pygame.image.load("images/infopage.png"), (WIDTH, HEIGHT))
-    panel_image = pygame.transform.scale(pygame.image.load("images/panel.png"), (WIDTH, HEIGHT))  # Solar panel image
 
     # Function to add border to an image
     def add_border(image, border_size=5):
@@ -28,7 +27,7 @@ def run(screen):
         return bordered_surface
 
     # Scale and load components
-    scale_factor = WIDTH * 0.15 / pygame.image.load("images/frame.png").get_width()
+    scale_factor = WIDTH * 0.05 / pygame.image.load("images/frame.png").get_width()
     components = [
         {"name": "Frame", "img": "images/frame.png", "order": 1},
         {"name": "Glass", "img": "images/glass.png", "order": 2},
@@ -52,32 +51,13 @@ def run(screen):
 
     # Assign positions
     for i, comp in enumerate(components):
-    
         comp["pos"] = [100, start_y]
         comp["target"] = pygame.Rect(WIDTH - 250, start_y, comp["surface"].get_width(), comp["surface"].get_height())
         comp["assembled"] = True
         start_y += comp["surface"].get_height() + vertical_gap
 
     # Game state
-    dragging, current_order, game_started, info_slide_shown, panel_shown, start_page_shown = None, len(components), False, False, False, False
-
-    def draw_start_screen():
-        screen.blit(background, (0, 0))
-        title = font.render("Solar Panel Disassembly", True, WHITE)
-        screen.blit(title, (WIDTH // 2 - title.get_width() // 2, HEIGHT // 4))
-        start_button = pygame.draw.rect(screen, GREEN, (WIDTH // 2 - 100, HEIGHT // 2 - 50, 200, 100))
-        screen.blit(font.render("Press SPACE to Start", True, WHITE), (WIDTH // 2 - 100, HEIGHT // 2 - 20))
-        return start_button
-
-    def draw_information_slide():
-        screen.blit(info_slide_image, (0, 0))
-        note_text = font.render("Press the space bar to continue to the game.", True, WHITE)
-        screen.blit(note_text, (WIDTH // 2 - note_text.get_width() // 2, HEIGHT - 50))
-
-    def draw_panel_image():
-        screen.blit(panel_image, (0, 0))
-        instruction_text = font.render("Press SPACE to start the game.", True, WHITE)
-        screen.blit(instruction_text, (WIDTH // 2 - instruction_text.get_width() // 2, HEIGHT - 50))
+    dragging, current_order = None, len(components)
 
     def draw_scene():
         screen.blit(background, (0, 0))
@@ -96,15 +76,15 @@ def run(screen):
     running = True
     while running:
         screen.fill(BLACK)
-
+    
         draw_scene()
-        if all(not c["assembled"] for c in components) and not well_done_message_shown:
-                well_done_message_shown = True
-                screen.blit(font.render("Well Done!", True, GREEN), (WIDTH // 2 - 80, 150))
-        
+
+        if all(not c["assembled"] for c in components):
+            return
+    
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                    running = False
+                running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 for comp in components:
                     if pygame.Rect(comp["pos"], comp["surface"].get_size()).collidepoint(event.pos) and comp["assembled"]:
@@ -116,13 +96,11 @@ def run(screen):
                     current_order -= 1
                 else:
                     reset_component_position(dragging)
-                    dragging = None
+                dragging = None
             elif event.type == pygame.MOUSEMOTION and dragging:
-                try:
-                    dragging["pos"][0] += event.rel[0]
-                    dragging["pos"][1] += event.rel[1]
-                except:
-                    print("except")
+                dragging["pos"][0] += event.rel[0]
+                dragging["pos"][1] += event.rel[1]
 
         pygame.display.flip()
 
+ 
