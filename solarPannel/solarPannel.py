@@ -1,11 +1,9 @@
 # Example file showing a circle moving on screen
-from pdb import run
-from tkinter.tix import Tree
-from xml.etree.ElementTree import TreeBuilder
 import pygame
 import cleaningMinigame
 import tempControlMinigame
 
+from powerTheCityMinigame import powerTheCityGame
 
 #funciton to render a slide and then move on when space is pressed
 def slide(slideName,screen):
@@ -68,7 +66,23 @@ def main():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
+    
+
+
+    
                     
+    #power the city slide
+    if(running):
+        running = slide("powerTheCitySlide.png",screen)
+    #power the city game
+    if(running):
+        game = powerTheCityGame()
+        while game.run(clock):
+            game.draw(screen)
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running=False
+
     #solar panel cleaning slide
     if(running):
         running = slide("cleaningSolarpannels.png",screen)
@@ -85,13 +99,6 @@ def main():
                 
     pygame.quit()
 
-
-
-def draw():
-    # fill the screen with a color to wipe away anything from last frame
-    screen.fill("purple")
-
-    pygame.draw.circle(screen, "red", player_pos, 40)
     
 
 
