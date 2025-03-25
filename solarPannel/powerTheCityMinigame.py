@@ -2,7 +2,7 @@ import pygame
 
 class powerTheCityGame:
     def __init__(self):
-        print("init powerTheCityGame")
+       
         self.grid_size = 6
         self.path = []
         self.active = False
@@ -24,7 +24,7 @@ class powerTheCityGame:
             self.window_width = int(bg_w * scale)
             self.window_height = int(bg_h * scale)
             self.background = pygame.transform.smoothscale(raw_bg, (self.window_width, self.window_height))
-            print("Background loaded and scaled")
+     
         except Exception as e:
             print("Failed to load background:", e)
             self.window_width, self.window_height = 552, 864
@@ -54,14 +54,14 @@ class powerTheCityGame:
         try:
             solar = pygame.image.load("images/solarpanelFarm.png").convert_alpha()
             self.solar_img = pygame.transform.smoothscale(solar, (icon_size, icon_size))
-            print("Solar panel loaded")
+            #print("Solar panel loaded")
         except Exception as e:
             print("Failed to load solar panel:", e)
 
         try:
             ground = pygame.image.load("images/groundSymbol.png").convert_alpha()
             self.ground_img = pygame.transform.smoothscale(ground, (icon_size, icon_size))
-            print("Ground symbol loaded")
+            #print("Ground symbol loaded")
         except Exception as e:
             print("Failed to load ground symbol:", e)
 
