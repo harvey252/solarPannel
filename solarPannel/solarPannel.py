@@ -7,11 +7,13 @@ import recycleMinigame
 
 from powerTheCityMinigame import powerTheCityGame
 
+import disassemably
+
 #funciton to render a slide and then move on when space is pressed
 def slide(slideName,screen):
     #loading in image for slide
     slideImage = spongeImage = pygame.image.load(slideName).convert()
-    slideImage=pygame.transform.scale(slideImage,(1280,720))
+    slideImage=pygame.transform.scale(slideImage,(1280,1000))
     
     #drawing image
     
@@ -19,7 +21,7 @@ def slide(slideName,screen):
     
     pygame.display.flip()
     
-
+    disassemably.run(screen)
         
     #ending slide when space is pressed
     running = True

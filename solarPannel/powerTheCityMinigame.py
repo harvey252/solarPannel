@@ -83,6 +83,7 @@ class powerTheCityGame:
         self.message = ""
 
     def draw(self, screen):
+
         screen.blit(self.background, (0, 0))
 
         for row in range(self.grid_size):

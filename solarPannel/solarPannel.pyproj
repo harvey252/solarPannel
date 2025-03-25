@@ -21,7 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="building.py" />
     <Compile Include="cleaningMinigame.py" />
+    <Compile Include="disassemably.py" />
     <Compile Include="powerTheCityGame.py" />
     <Compile Include="recycleMinigame.py" />
     <Compile Include="solarPannel.py" />
