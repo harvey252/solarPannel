@@ -129,9 +129,16 @@ def main():
         recycleMinigame.run(screen)
     
 
-    #prueifying siclone slide
-    
+    #recycling silcon slide
+    if(running):
+        running = slide("images/recyclingSilconeSlide.png",screen)
+
+
     #final slide 
+    if(running):
+        running = slide("images/finalSlide.png",screen)    
+    
+    
     pygame.quit()
 
     

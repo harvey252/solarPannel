@@ -88,6 +88,7 @@ class powerTheCityGame:
 
     def draw(self, screen):
 
+        screen.fill((255,153,0))
         screen.blit(self.background, (0, 0))
 
         for row in range(self.grid_size):

@@ -81,8 +81,11 @@ def run(screen):
             draw_components()
 
             # Show current order
-            order_message = font.render(f"Current Order: {current_order}", True, (0, 0, 0))
-            screen.blit(order_message, (WIDTH - 200, HEIGHT - 40))
+            if(current_order!=5):
+                order_message = font.render(f"Current Order: {current_order}", True, (0, 0, 0))
+            else:
+                order_message = font.render(f"press space to continue", True, (0, 0, 0))
+            screen.blit(order_message, (WIDTH - 220, HEIGHT - 40))
 
             # Check if panel is fully assembled
             if all(component["assembled"] for component in components):
